@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="eGAIT: Multi-Skilled Policy for Energy-efficient Gait Transitions">
+  <meta name="keywords" content="Multi-skill Imitation, Energy efficient transitions, Quadrupedal Robots">
+  <title>eGait: Multi-Skilled Transitions</title>
+
+  <!-- Fonts and Styles -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <!-- JavaScript -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+
+<body>
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1">SDS: See it. Do it. Sorted</h1>
+        <h2 class="subtitle">Quadruped Skill Synthesis from Single Video Demonstration</h2>
+        <br>
+        <a href="https://github.com/sdsreview/SDS_ANONYM" class="button is-dark is-rounded">
+          <span class="icon"><i class="fab fa-github"></i></span>
+          <span>Code</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1Kbi66gLyrw43hCJz0qNezKfUWp_yR2xJ/view?usp=drive_link" class="button is-danger is-rounded">
+          <span class="icon"><i class="fab fa-youtube"></i></span>
+          <span>Video</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Abstract</h2>
+      <p class="content has-text-justified">
+        We present SDS ("See it. Do it. Sorted."), a novel pipeline for intuitive quadrupedal skill learning
+        from a single demonstration video. Leveraging the Visual capabilities of GPT-4o, SDS processes input
+        videos through our novel chain-of-thought promoting technique (SUS) and generates executable reward
+        functions (RFs) that drive the imitation of locomotion skills, through learning a Proximal Policy Optimization
+        (PPO)-based Reinforcement Learning (RL) policy, using environment information from the NVIDIA IsaacGym simulator.
+        SDS autonomously evaluates the RFs by monitoring the individual reward components and supplying training footage
+        and fitness metrics back into GPT-4o, which is then prompted to evolve the RFs to achieve higher task fitness at
+        each iteration. We validate our method on the Unitree Go1 robot, demonstrating its ability to execute variable
+        skills such as trotting, bounding, pacing and hopping, achieving high imitation fidelity and locomotion stability.
+        SDS shows improvements over SOTA methods in task adaptability, reduced dependence on domain-specific knowledge, and
+        bypassing the need for labor-intensive reward engineering and large-scale training datasets.
+      </p>
+      <div class="has-text-centered">
+        <img src="./resources/figures/method.png" alt="SDS Method Overview" style="max-width: 90%;">
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">SDS Simulation Performance</h2>
+
+      <div class="columns is-multiline is-centered">
+         <!-- Pacing -->
+         <div class="column is-half">
+          <h5 class="title is-5">Pacing (Demonstration)</h5>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/demo/pace.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-half">
+          <h5 class="title is-5">Pacing (Simulation)</h5>
+          <video id="sim-pace" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/simualtion/pace.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- Trotting -->
+        <div class="column is-half">
+          <h5 class="title is-5">Trotting (Demonstration)</h5>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/demo/trot.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-half">
+          <h5 class="title is-5">Trotting (Simulation)</h5>
+          <video id="sim-trot" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/simualtion/trot.mp4" type="video/mp4">
+          </video>
+        </div>      
+        
+        <!-- Hopping -->
+        <div class="column is-half">
+          <h5 class="title is-5">Hopping (Demonstration)</h5>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/demo/hop.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-half">
+          <h5 class="title is-5">Hopping (Simulation)</h5>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/simualtion/hop.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- Bounding -->
+        <div class="column is-half">
+          <h5 class="title is-5">Bounding (Demonstration)</h5>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/demo/running.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-half">
+          <h5 class="title is-5">Bounding (Simulation)</h5>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/simualtion/bound.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Real World Deployment</h2>
+      <p class="has-text-centered">
+        We deploy all policies on the on-board computer of a Unitree Go1 robot, using a Docker architecture. We apply base tracking to verify the stability of the locomotion policies.
+      </p>
+
+      <div class="columns is-multiline is-centered">
+        <!-- Pacing -->
+        <div class="column is-half">
+          <h5 class="title is-5">Pacing</h5>
+          <video id="real-pace" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/real_world/pace_c.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- Trotting -->
+        <div class="column is-half">
+          <h5 class="title is-5">Trotting</h5>
+          <video id="real-trot" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/real_world/trot_c.m4v" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- Hopping -->
+        <div class="column is-half">
+          <h5 class="title is-5">Hopping</h5>
+          <video id="real-hop" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/real_world/hop_c.m4v" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- Bounding -->
+        <div class="column is-half">
+          <h5 class="title is-5">Bounding</h5>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/real_world/bound_c.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">SDS Generalization on ANYmal-D</h2>
+      <p class="has-text-centered">
+        We demonstrate SDS’s ability to generalize across platforms by successfully deploying policies on an ANYmal-D quadruped with inverted joint configuration.
+      </p>
+  
+      <div class="columns is-multiline is-centered">
+        <!-- ANYmal Trotting -->
+        <div class="column is-half">
+          <h5 class="title is-5">Trotting</h5>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/anymal/anymal_trot_c.mp4" type="video/mp4">
+          </video>
+          <h6 class="title is-6 mt-3">Slow Motion (0.25 x Speed)</h6>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/anymal/anymal_trot_slow.mp4" type="video/mp4">
+          </video>
+        </div>
+  
+        <!-- ANYmal Bounding -->
+        <div class="column is-half">
+          <h5 class="title is-5">Bounding</h5>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/anymal/anymal_bound_c.mp4" type="video/mp4">
+          </video>
+          <h6 class="title is-6 mt-3">Slow Motion (0.25 x Speed)</h6>
+          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+            <source src="./resources/anymal/anymal_bound_slow.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const pace = document.getElementById('real-pace');
+      const trot = document.getElementById('real-trot');
+      const hop = document.getElementById('real-hop');
+      const simPace = document.getElementById('sim-pace');
+      const simTrot = document.getElementById('sim-trot');
+      if (pace) pace.playbackRate = 0.35;
+      if (trot) trot.playbackRate = 0.5;
+      if (hop) hop.playbackRate = 0.65;
+      if (simPace) simPace.playbackRate = 0.35;
+      if (simTrot) simTrot.playbackRate = 0.5;
+    });
+  </script>
+</body>
+
+</html>
