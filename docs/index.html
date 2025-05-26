@@ -29,7 +29,7 @@
         <h1 class="title is-1">eGAIT: Multi-Skilled Policy for Energy-efficient Gait Transitions</h1>
         <h2 class="subtitle">Energy efficient and stable locomotion for quadrupedal robots. </h2>
         <br>
-        <a href="https://github.com/sdsreview/SDS_ANONYM" class="button is-dark is-rounded">
+        <a href="https://github.com/sdsreview/egait_review.git" class="button is-dark is-rounded">
           <span class="icon"><i class="fab fa-github"></i></span>
           <span>Code</span>
         </a>
@@ -46,18 +46,17 @@
       <h2 class="title is-3 has-text-centered">Abstract</h2>
       <p class="content has-text-justified">
         Achieving adaptive, multi-skilled, and energy-efficient locomotion is vital for advancing the operation of autonomous quadrupedal systems. This study presents eGAIT, a unified multi-skilled policy enabling energy-efficient and stable gait transitions across nine non-monotonic, velocity-optimized gaits, in response to dynamic velocity commands. The framework leverages a hybrid control architecture integrating model-based and learning-based methods to address the entire locomotion pipeline. An MPC-based gait generator produces velocity-optimized trajectories, which are imitated through Proximal Policy Optimization (PPO), driven by a  Adversarial Motion Prior (AMP) style reward to train distinct policies for specific velocity ranges. These policies are unified through a Hierarchical Reinforcement Learning (HRL) framework featuring a novel modified Deep Q-Network (eDQN) for real-time velocity-to-policy mapping. Training efficiency is enhanced by an auxiliary selector layer that guides velocity-policy mapping, while a sparsely activated stability reward mechanism ensures smooth gait transitions by incorporating geometric and rotational stability.
-        Achieving adaptive, multi-skilled, and energy-efficient locomotion is vital for advancing the operation of autonomous quadrupedal systems. This study presents eGAIT, a unified multi-skilled policy enabling energy-efficient and stable gait transitions across nine non-monotonic, velocity-optimized gaits, in response to dynamic velocity commands. The framework leverages a hybrid control architecture integrating model-based and learning-based methods to address the entire locomotion pipeline. An MPC-based gait generator produces velocity-optimized trajectories, which are imitated through Proximal Policy Optimization (PPO), driven by a  Adversarial Motion Prior (AMP) style reward to train distinct policies for specific velocity ranges. These policies are unified through a Hierarchical Reinforcement Learning (HRL) framework featuring a novel modified Deep Q-Network (eDQN) for real-time velocity-to-policy mapping. Training efficiency is enhanced by an auxiliary selector layer that guides velocity-policy mapping, while a sparsely activated stability reward mechanism ensures smooth gait transitions by incorporating geometric and rotational stability.
-        Extensively validated in simulation and on a Unitree Go1 robot, eGAIT achieves a $100\%$ success rate in velocity-to-policy mapping, a $35\%$ improvement in energy efficiency, a $31\%$ improvement in both velocity tracking and stability compared to the next best state-of-the-art method. This work advances autonomous quadrupedal locomotion, enabling longer, more efficient, and stable operations in dynamic environments..
+        Extensively validated in simulation and on a Unitree Go1 robot, eGAIT achieves a 100% success rate in velocity-to-policy mapping, a 35% improvement in energy efficiency, a $31\%$ improvement in both velocity tracking and stability compared to the next best state-of-the-art method. This work advances autonomous quadrupedal locomotion, enabling longer, more efficient, and stable operations in dynamic environments..
       </p>
       <div class="has-text-centered">
-        <img src="./resources/figures/method.png" alt="SDS Method Overview" style="max-width: 90%;">
+        <img src="./resources/figures/method.png" alt="eGAIT Method Overview" style="max-width: 100%;">
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <h2 class="title is-3 has-text-centered">SDS Simulation Performance</h2>
+      <h2 class="title is-3 has-text-centered">eGAIT Simulation Performance</h2>
 
       <div class="columns is-multiline is-centered">
          <!-- Pacing -->
