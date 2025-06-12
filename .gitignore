@@ -31,4 +31,4 @@ env/
 .mpc_optimiser/robot_interface_correct.so
 .mpc_optimiser/robot_interface.so
 .mpc_optimiser/python_interface.cpp
-.mpc_optimiser/MPC_OPTIMISER/evaluation_scripts
+.mpc_optimiser/MPC_OPTIMISER/evaluation_scripts/saved_models
