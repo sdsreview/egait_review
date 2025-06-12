@@ -6,29 +6,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="eGAIT: Multi-Skilled Policy for Energy-efficient Gait Transitions">
   <meta name="keywords" content="Multi-skill Imitation, Energy efficient transitions, Quadrupedal Robots">
-  <title>eGait: Multi-Skilled Transitions</title>
+  <title>eGAIT: Multi-Skilled Transitions</title>
 
   <!-- Fonts and Styles -->
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="./static/css/index.css">
-
-  <!-- JavaScript -->
-  <script src="https://www.youtube.com/iframe_api"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #fdfdfd;
+      color: #222;
+    }
+    .hero {
+      background: linear-gradient(135deg, #004e92 0%, #000428 100%);
+      color: white;
+    }
+    .hero .title,
+    .hero .subtitle {
+      color: #fff;
+    }
+    .button.is-rounded {
+      margin: 0.5rem;
+    }
+    .section-heading {
+      margin-bottom: 2rem;
+    }
+    .video-container {
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .has-text-centered p {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    .column video {
+      width: 100%;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 
+
 <body>
-  <section class="hero is-primary is-bold">
+  <section class="hero is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
         <h1 class="title is-1">eGAIT: Multi-Skilled Policy for Energy-efficient Gait Transitions</h1>
-        <h2 class="subtitle">Energy efficient and stable locomotion for quadrupedal robots. </h2>
-        <br>
+        <h2 class="subtitle is-4">Efficient and Adaptive Quadrupedal Locomotion Across Complex Terrains</h2>
         <a href="https://github.com/sdsreview/egait_review.git" class="button is-dark is-rounded">
           <span class="icon"><i class="fab fa-github"></i></span>
           <span>Code</span>
@@ -43,10 +71,26 @@
 
   <section class="section">
     <div class="container">
-      <h2 class="title is-3 has-text-centered">Abstract</h2>
-      <p class="content has-text-justified">
-        Achieving adaptive, multi-skilled, and energy-efficient locomotion is vital for advancing the operation of autonomous quadrupedal systems. This study presents eGAIT, a unified multi-skilled policy enabling energy-efficient and stable gait transitions across nine non-monotonic, velocity-optimized gaits, in response to dynamic velocity commands. The framework leverages a hybrid control architecture integrating model-based and learning-based methods to address the entire locomotion pipeline. An MPC-based gait generator produces velocity-optimized trajectories, which are imitated through Proximal Policy Optimization (PPO), driven by a  Adversarial Motion Prior (AMP) style reward to train distinct policies for specific velocity ranges. These policies are unified through a Hierarchical Reinforcement Learning (HRL) framework featuring a novel modified Deep Q-Network (eDQN) for real-time velocity-to-policy mapping. Training efficiency is enhanced by an auxiliary selector layer that guides velocity-policy mapping, while a sparsely activated stability reward mechanism ensures smooth gait transitions by incorporating geometric and rotational stability.
-        Extensively validated in simulation and on a Unitree Go1 robot, eGAIT achieves a 100% success rate in velocity-to-policy mapping, a 35% improvement in energy efficiency, a $31\%$ improvement in both velocity tracking and stability compared to the next best state-of-the-art method. This work advances autonomous quadrupedal locomotion, enabling longer, more efficient, and stable operations in dynamic environments..
+      <h2 class="title is-3 has-text-centered">Table of Contents</h2>
+      <nav class="content has-text-centered">
+        <ul>
+          <li><a href="#abstract">Abstract</a></li>
+          <li><a href="#amp-policies">1. AMP Imitated Policies</a></li>
+          <li><a href="#simulation-transitions">2. eGAIT Transitions in Simulation</a></li>
+          <li><a href="#real-world-transitions">3. eGAIT Transitions in Real World</a></li>
+          <li><a href="#stability-tests">4. eGAIT Stability Tests</a></li>
+          <li><a href="#ablations">5. Ablations</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section id="abstract" class="section">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered section-heading">Abstract</h2>
+      <p class="content is-medium has-text-justified">
+        Achieving adaptive, multi-skilled, and energy-efficient locomotion is vital for advancing the operation of autonomous quadrupedal systems. This study presents eGAIT, a unified multi-skilled policy enabling energy-efficient and stable gait transitions across nine non-monotonic, velocity-optimized gaits, in response to dynamic velocity commands. The framework leverages a hybrid control architecture integrating model-based and learning-based methods to address the entire locomotion pipeline. An MPC-based gait generator produces velocity-optimized trajectories, which are imitated through Proximal Policy Optimization (PPO), driven by an Adversarial Motion Prior (AMP) style reward to train distinct policies for specific velocity ranges. These policies are unified through a Hierarchical Reinforcement Learning (HRL) framework featuring a novel modified Deep Q-Network (eDQN) for real-time velocity-to-policy mapping. Training efficiency is enhanced by an auxiliary selector layer that guides velocity-policy mapping, while a sparsely activated stability reward mechanism ensures smooth gait transitions by incorporating geometric and rotational stability.
+        Extensively validated in simulation and on a Unitree Go1 robot, eGAIT achieves a 100% success rate in velocity-to-policy mapping, a 35% improvement in energy efficiency, and a 31% improvement in both velocity tracking and stability compared to the next best state-of-the-art method.
       </p>
       <div class="has-text-centered">
         <img src="./resources/figures/method.png" alt="eGAIT Method Overview" style="max-width: 100%;">
@@ -54,168 +98,288 @@
     </div>
   </section>
 
-  <section class="section">
+  <section id="amp-policies" class="section">
     <div class="container">
-      <h2 class="title is-3 has-text-centered">eGAIT Simulation Performance</h2>
+    <h2 class="title is-3 has-text-centered">1. AMP Imitated Policies</h2>
 
-      <div class="columns is-multiline is-centered">
-         <!-- Pacing -->
-         <div class="column is-half">
-          <h5 class="title is-5">Pacing (Demonstration)</h5>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/demo/pace.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-half">
-          <h5 class="title is-5">Pacing (Simulation)</h5>
-          <video id="sim-pace" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/simualtion/pace.mp4" type="video/mp4">
-          </video>
-        </div>
+    <p class="has-text-centered mb-5">
+      Below, we showcase the AMP-learned locomotion policies at target velocities within the total range fomr 0.1 to 0.9 m/s.
+    </p>
 
-        <!-- Trotting -->
-        <div class="column is-half">
-          <h5 class="title is-5">Trotting (Demonstration)</h5>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/demo/trot.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-half">
-          <h5 class="title is-5">Trotting (Simulation)</h5>
-          <video id="sim-trot" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/simualtion/trot.mp4" type="video/mp4">
-          </video>
-        </div>      
-        
-        <!-- Hopping -->
-        <div class="column is-half">
-          <h5 class="title is-5">Hopping (Demonstration)</h5>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/demo/hop.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-half">
-          <h5 class="title is-5">Hopping (Simulation)</h5>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/simualtion/hop.mp4" type="video/mp4">
-          </video>
-        </div>
+    <div class="columns is-multiline is-centered">
 
-        <!-- Bounding -->
-        <div class="column is-half">
-          <h5 class="title is-5">Bounding (Demonstration)</h5>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/demo/running.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-half">
-          <h5 class="title is-5">Bounding (Simulation)</h5>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/simualtion/bound.mp4" type="video/mp4">
-          </video>
-        </div>
-
-
-
+      <!-- 1. Pacing (Demo) -->
+      <div class="column is-one-third">
+        <video class="slow-video" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+          <source src="./resources/vels/vel1.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered mt-2">vel = 0.1 m/s</p>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered">Real World Deployment</h2>
-      <p class="has-text-centered">
-        We deploy all policies on the on-board computer of a Unitree Go1 robot, using a Docker architecture. We apply base tracking to verify the stability of the locomotion policies.
+      <!-- 2. Pacing (Sim) -->
+      <div class="column is-one-third">
+        <video class="slow-video" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+          <source src="./resources/vels/vel2.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered mt-2">vel = 0.2 m/s</p>
+      </div>
+
+      <!-- 3. Trotting (Demo) -->
+      <div class="column is-one-third">
+        <video class="slow-video" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+          <source src="./resources/vels/vel3.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered mt-2">vel = 0.3 m/s</p>
+      </div>
+
+      <!-- 4. Trotting (Sim) -->
+      <div class="column is-one-third">
+        <video class="slow-video" controls autoplay muted loop  style="width: 100%; border-radius: 10px;">
+          <source src="./resources/vels/vel4.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered mt-2">vel = 0.4 m/s</p>
+      </div>
+
+      <!-- 5. Hopping (Demo) -->
+      <div class="column is-one-third">
+        <video  class="slow-video" controls autoplay muted loop  style="width: 100%; border-radius: 10px;">
+          <source src="./resources/vels/vel5.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered mt-2">vel = 0.5 m/s</p>
+      </div>
+
+      <!-- 6. Hopping (Sim) -->
+      <div class="column is-one-third">
+        <video class="slow-video" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+          <source src="./resources/vels/vel6.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered mt-2">vel = 0.6 m/s</p>
+      </div>
+
+      <!-- 7. Bounding (Demo) -->
+      <div class="column is-one-third">
+        <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+          <source src="./resources/vels/vel7.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered mt-2">vel = 0.7 m/s</p>
+      </div>
+
+      <!-- 8. Bounding (Sim) -->
+      <div class="column is-one-third">
+        <video  controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+          <source src="./resources/vels/vel8.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered mt-2">vel = 0.8 m/s</p>
+      </div>
+
+      <!-- 9. Placeholder or Other Gait -->
+      <div class="column is-one-third">
+        <video  controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+          <source src="./resources/vels/vel9.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered mt-2">vel = 0.9 m/s</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="simulation-transitions" class="section">
+  <div class="container is-fluid">
+    <h2 class="title is-3 has-text-centered">2. eGAIT Transitions in Simulation</h2>
+
+    <!-- Introductory paragraph -->
+    <p class="has-text-centered mb-5">
+      We present visual representations of the three transition experiments described in the paper, demonstrating eGAIT's adaptability under different commanded velocity profiles.
+    </p>
+
+    <!-- Experiment 1 -->
+    <div class="has-text-centered mb-6">
+      <p class="subtitle is-5 has-text-weight-bold">Experiment 1: Ascending and descending velocities</p>
+      <p class="mb-2">
+        In Experiment 1, we command velocities in ascending and then descending order, from <i>v<sup>*</sup> = 0.1</i> to <i>0.9 m/s</i> and back, using discrete and constant intervals of 2 seconds per transition.
       </p>
-
-      <div class="columns is-multiline is-centered">
-        <!-- Pacing -->
-        <div class="column is-half">
-          <h5 class="title is-5">Pacing</h5>
-          <video id="real-pace" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/real_world/pace_c.mp4" type="video/mp4">
-          </video>
-        </div>
-
-        <!-- Trotting -->
-        <div class="column is-half">
-          <h5 class="title is-5">Trotting</h5>
-          <video id="real-trot" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/real_world/trot_c.m4v" type="video/mp4">
-          </video>
-        </div>
-
-        <!-- Hopping -->
-        <div class="column is-half">
-          <h5 class="title is-5">Hopping</h5>
-          <video id="real-hop" controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/real_world/hop_c.m4v" type="video/mp4">
-          </video>
-        </div>
-
-        <!-- Bounding -->
-        <div class="column is-half">
-          <h5 class="title is-5">Bounding</h5>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/real_world/bound_c.mp4" type="video/mp4">
-          </video>
-        </div>
-
-        
-      </div>
+      <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+        <source src="./resources/simulation/vup.mp4" type="video/mp4">
+      </video>
     </div>
+
+    <!-- Experiment 2 -->
+    <div class="has-text-centered mb-6">
+      <p class="subtitle is-5 has-text-weight-bold">Experiment 2: Interpolation of random velocity samples</p>
+      <p class="mb-2">
+        In Experiment 2, we interpolate between randomly selected target velocities within the x-direction (<i>v<sub>x</sub></i>), using constant time intervals for each transition phase.
+      </p>
+      <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+        <source src="./resources/simulation/vdown.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Experiment 3 -->
+    <div class="has-text-centered">
+      <p class="subtitle is-5 has-text-weight-bold">Experiment 3: Randomized velocity and timing schedule</p>
+      <p class="mb-2">
+        In Experiment 3, we command randomly sampled target velocities <i>v<sup>*</sup></i> within the defined range, using variable time intervals for each transition. This simulates more unpredictable control inputs via slider (simulation) or joystick (real-world).
+      </p>
+      <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+        <source src="./resources/simulation/vrandom.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="real-world-transitions" class="section">
+  <div class="container is-fluid">
+    <h2 class="title is-3 has-text-centered">3. eGAIT Transitions in Real World</h2>
+
+    <!-- Introductory paragraph -->
+    <p class="has-text-centered mb-5">
+      We present Experiment 3 conducted in the real world, following a random velocity schedule. The behavior of eGAIT is shown from different camera viewpoints to highlight the consistency and robustness of gait transitions across varying perspectives.
+    </p>
+
+    <!-- Video 1 -->
+    <div class="has-text-centered mb-6">
+      <p class="subtitle is-5 has-text-weight-semibold">Viewpoint 1</p>
+      <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+        <source src="./resources/real_world/real_close.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Video 2 -->
+    <div class="has-text-centered mb-6">
+      <p class="subtitle is-5 has-text-weight-semibold">Viewpoint 2</p>
+      <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
+        <source src="./resources/real_world/real_far.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
   </section>
 
+  <section id="stability-tests" class="section">
   <section class="section">
     <div class="container">
-      <h2 class="title is-3 has-text-centered">SDS Generalization on ANYmal-D</h2>
-      <p class="has-text-centered">
-        We demonstrate SDS’s ability to generalize across platforms by successfully deploying policies on an ANYmal-D quadruped with inverted joint configuration.
+      <h2 class="title is-3 has-text-centered">4. eGAIT Stability Tests</h2>
+      <p class="has-text-centered mb-5">
+        We provide visualizations of eGAIT's behavior under a range of challenging conditions to evaluate its robustness beyond nominal settings. These include environmental disturbances such as uneven terrain, varying friction, and slope gradients, as well as dynamic perturbations like lateral pushes of increasing force. The following videos illustrate how the learned policy maintains stable locomotion across these scenarios, showcasing its generalization and resilience capabilities.
       </p>
-  
+      <h3 class="title is-4 has-text-centered mt-5">4.1 Terrain Variations</h3>
+      <p class="has-text-centered mb-5">
+        To test eGAIT’s robustness during velocity transitions, we introduce terrain disturbances: height perturbations (h), slope (s), and ground friction (f). 
+      </p>
       <div class="columns is-multiline is-centered">
-        <!-- ANYmal Trotting -->
         <div class="column is-half">
-          <h5 class="title is-5">Trotting</h5>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/anymal/anymal_trot_c.mp4" type="video/mp4">
+          <video controls autoplay muted loop style="width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;">
+            <source src="./resources/terrain_ablations/h0.02s0.002f1.mp4" type="video/mp4">
           </video>
-          <h6 class="title is-6 mt-3">Slow Motion (0.25 x Speed)</h6>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/anymal/anymal_trot_slow.mp4" type="video/mp4">
-          </video>
+          <p class="has-text-centered mt-2">h=0.02m, s=0.002, f=1</p>
         </div>
-  
-        <!-- ANYmal Bounding -->
         <div class="column is-half">
-          <h5 class="title is-5">Bounding</h5>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/anymal/anymal_bound_c.mp4" type="video/mp4">
+          <video controls autoplay muted loop style="width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;">
+            <source src="./resources/terrain_ablations/h0.02s0.003f0.6.mp4" type="video/mp4">
           </video>
-          <h6 class="title is-6 mt-3">Slow Motion (0.25 x Speed)</h6>
-          <video controls autoplay muted loop style="width: 100%; border-radius: 10px;">
-            <source src="./resources/anymal/anymal_bound_slow.mp4" type="video/mp4">
+          <p class="has-text-centered mt-2">h=0.02m, s=0.003, f=0.6</p>
+        </div>
+        <div class="column is-half">
+          <video controls autoplay muted loop style="width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;">
+            <source src="./resources/terrain_ablations/h0.02s0.002f0.4.mp4" type="video/mp4">
           </video>
+          <p class="has-text-centered mt-2">h=0.02m, s=0.002, f=0.4</p>
+        </div>
+        <div class="column is-half">
+          <video controls autoplay muted loop style="width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;">
+            <source src="./resources/terrain_ablations/h0.03s0.003f0.6.mp4" type="video/mp4">
+          </video>
+          <p class="has-text-centered mt-2">h=0.03m, s=0.003, f=0.6</p>
+        </div>
+        <div class="column is-half">
+          <video controls autoplay muted loop style="width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;">
+            <source src="./resources/terrain_ablations/h0s0f1.mp4" type="video/mp4">
+          </video>
+          <p class="has-text-centered mt-2">DEFAULT: h=0m, s=0, f=1</p>
+        </div>
+      </div>
+
+      <h3 class="title is-4 has-text-centered mt-6">4.2 Lateral Pushes</h3>
+      <p class="has-text-centered mb-5">
+        We assess the policy's robustness during velocity transitions by applying lateral pushes of 50–110 N to the robot's base for 0.2 seconds, following Experiment 1.
+      </p>
+      <div class="columns is-multiline is-centered">
+        <div class="column is-half">
+          <video controls autoplay muted loop style="width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;">
+            <source src="./resources/pushes/p50.mp4" type="video/mp4">
+          </video>
+          <p class="has-text-centered mt-2">F=50N</p>
+        </div>
+        <div class="column is-half">
+          <video controls autoplay muted loop style="width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;">
+            <source src="./resources/pushes/p70.mp4" type="video/mp4">
+          </video>
+          <p class="has-text-centered mt-2">F=70N</p>
+        </div>
+        <div class="column is-half">
+          <video controls autoplay muted loop style="width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;">
+            <source src="./resources/pushes/p90.mp4" type="video/mp4">
+          </video>
+          <p class="has-text-centered mt-2">F=90N</p>
+        </div>
+        <div class="column is-half">
+          <video controls autoplay muted loop style="width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;">
+            <source src="./resources/pushes/p110.mp4" type="video/mp4">
+          </video>
+          <p class="has-text-centered mt-2">F=110N</p>
         </div>
       </div>
     </div>
   </section>
-  
+
+  <section id="ablations" class="section">
+  <div class="container is-fluid">
+    <h2 class="title is-3 has-text-centered">5. Ablations</h2>
+
+    <!-- Introductory paragraph -->
+    <p class="has-text-centered mb-6">
+     We evaluate eDQN’s design via an ablation study comparing it to a standard DQN and a rule-based Switch baseline under controlled velocity transitions.
+    </p>
+
+    <!-- Video 1 -->
+    <div class="has-text-centered mb-6">
+      <h3 class="title is-4 has-text-centered mt-5">5.1 Switch</h3>
+      <p class="has-text-centered mb-5">
+        The Switch baseline uses fixed velocity thresholds to select policies without learning, resulting in poor adaptability and unstable transitions.
+      </p>
+      <video controls autoplay muted loop style="width: 60%; border-radius: 6px;">
+        <source src="./resources/ablations/switch.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Video 2 -->
+    <div class="has-text-centered mb-6">
+     <h3 class="title is-4 has-text-centered mt-5">5.2 DQN</h3>
+      <p class="has-text-centered mb-5">
+        The DQN baseline removes auxiliary guidance, leading to slower convergence and less consistent policy alignment compared to eDQN.
+      </p>
+      <video controls autoplay muted loop style="width: 60%; border-radius: 6px;">
+        <source src="./resources/real_world/real_far.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  </section>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const pace = document.getElementById('real-pace');
-      const trot = document.getElementById('real-trot');
-      const hop = document.getElementById('real-hop');
-      const simPace = document.getElementById('sim-pace');
-      const simTrot = document.getElementById('sim-trot');
-      if (pace) pace.playbackRate = 0.35;
-      if (trot) trot.playbackRate = 0.5;
-      if (hop) hop.playbackRate = 0.65;
-      if (simPace) simPace.playbackRate = 0.35;
-      if (simTrot) simTrot.playbackRate = 0.5;
-    });
-  </script>
-</body>
+  document.addEventListener("DOMContentLoaded", function () {
+    const slowdownFactor = 0.5; // 🎯 Change this to your desired playback speed (e.g., 0.75, 0.25, etc.)
+    const videos = document.querySelectorAll(".slow-video");
 
-</html>
+    videos.forEach(video => {
+      video.addEventListener("loadedmetadata", function () {
+        video.playbackRate = slowdownFactor;
+      });
+    });
+  });
+</script>
+
+  </body>
+
+  </html>
