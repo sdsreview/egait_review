@@ -4,14 +4,13 @@ Further development (new features, bug fixes, etc.) occurs in the `master` branc
 
 The `paper` branch contains the original code accompanying the paper:
 
-    "eGAIT: Multi-Skilled Policy for Energy-efficient Gait Transitions"
+eGAIT: Multi-Skilled Policy for Energy-efficient Gait Transitions
     by Anonymous Authors
 
 This project provides an environment for executing multi-skill policy switches,
 adaptable to real-time velocity changes.
 
-Project page:  
-https://sdsreview.github.io/egait_review/
+Project page:  https://sdsreview.github.io/egait_review/
 
 ---
 
@@ -20,6 +19,13 @@ https://sdsreview.github.io/egait_review/
 Recommended setup:
 - Python 3.9
 - Ubuntu 20.04 LTS
+
+Install the repository, in a terminal run: 
+```bash
+git clone https://github.com/sdsreview/egait_review.git
+cd egait_review/
+```
+
 
 ### 1. Create a Conda Environment
 
