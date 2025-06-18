@@ -1,12 +1,11 @@
-Here is the full `README.txt` version, formatted for plain text (no markdown syntax):
-
----
 
 ```
 eGAIT
 =====
 
 Further development (new features, bug fixes, etc.) occurs in the 'master' branch.
+=======
+# eGAIT: Multi-Skilled Policy for Energy-efficient Gait Transitions"
 
 The 'paper' branch of this repository contains the original code accompanying the paper:
 
