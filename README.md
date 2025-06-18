@@ -1,4 +1,4 @@
-# eGAIT 
+# eGAIT: Multi-Skilled Policy for Energy-efficient Gait Transitions"
 
 Further development (new features, bug fixes etc) happen in the master branch.
 The 'paper' branch of this repository contains the original code accompanying the paper:
