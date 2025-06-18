@@ -32,10 +32,12 @@ cd egait_review/
 Use the following commands to set up a new Conda environment named `egait`:
 
 ```bash
-conda create -n egait python=3.9
+cd egait_review/egait_code/
+conda env create -f environment.yml
 conda activate egait
-pip install -r requirements.txt
 ```
+
+This step might take a few minuites.
 
 ### 2. Install Optional MPC Extension
 
