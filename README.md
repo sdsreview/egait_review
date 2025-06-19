@@ -23,11 +23,10 @@ Recommended setup:
 Install the repository, in a terminal run: 
 ```bash
 git clone https://github.com/sdsreview/egait_review.git
-cd egait_review/
 ```
 
 
-### 1. Create a Conda Environment
+###  Create a Conda Environment
 
 Use the following commands to set up a new Conda environment named `egait`:
 
@@ -39,34 +38,20 @@ conda activate egait
 
 This step might take a few minuites.
 
-### 2. Install Optional MPC Extension
-
-If you plan to use the MPC controller, install the optional extension:
-
-```bash
-python3 setup.py install --user
-```
-
-### 3. Install System Dependencies
-
-Install OpenMPI development headers required for parallelization:
-
-```bash
-sudo apt install libopenmpi-dev
-```
-
----
 
 ## Download Pretrained Checkpoints
 
 Download the pretrained eGAIT policy checkpoints from:
 
-https://drive.google.com/drive/folders/15neku_yEqlh9RGHGGyWXrtzUGVWKLEYx?usp=sharing
+https://drive.google.com/drive/folders/1rY5rzxWZWbVclIOgcqkLmA8_imL5ZqrD?usp=sharing
 
-Then move the `high_level` folder into the repository's evaluation script directory:
+Then move the `high_level` folder into the repository's evaluation script directory. In a new terminal:
 
 ```bash
-mv ~/Downloads/high_level /home/egait/egait_code/egait/evaluation_scripts/
+mv ~/Downloads/saved_model.zip ~/egait_review/egait_code/egait/evaluation_scripts/
+cd /home/egait/egait_code/egait/evaluation_scripts/
+unzip saved_model.zip & rm saved_model.zip
+
 ```
 
 ---
@@ -76,6 +61,7 @@ mv ~/Downloads/high_level /home/egait/egait_code/egait/evaluation_scripts/
 To run the main evaluation script:
 
 ```bash
+cd ../..
 python egait/evaluation_scripts/egait_evaluator.py
 ```
 

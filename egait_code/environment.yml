@@ -40,6 +40,6 @@ dependencies:
       - yahoo-finance==1.4.0
       - tensorflow==2.11.0
       - quadprog
-      - pytorch
+      - torch
       - torchvision
       - torchaudio
