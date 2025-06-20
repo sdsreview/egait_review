@@ -2,13 +2,13 @@
 
 Further development (new features, bug fixes, etc.) occurs in the `master` branch.
 
-The `paper` branch contains the original code accompanying the paper:
-
 eGAIT: Multi-Skilled Policy for Energy-efficient Gait Transitions
     by Anonymous Authors
 
 This project provides an environment for executing multi-skill policy switches,
 adaptable to real-time velocity changes.
+
+Currently we provide an inference environemnt for eGAIT, with the training code arriving sooon!
 
 Project page:  https://sdsreview.github.io/egait_review/
 
