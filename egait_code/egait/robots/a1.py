@@ -25,6 +25,9 @@ import math
 import re
 import numpy as np
 import pybullet as pyb  # pytype: disable=import-error
+import pybullet_data as p 
+pyb.setAdditionalSearchPath(p.getDataPath())
+
 
 from egait.robots import laikago_constants
 # from MPC_OPTIMISER.robots import laikago_motor
@@ -73,23 +76,6 @@ HIP_OFFSETS = np.array([[0.183, -0.00, 0.], [0.183, 0.0, 0.],
                         [-0.183, -0.0, 0.], [-0.183, 0., 0.]
                         ]) + COM_OFFSET
 
-
-
-# COM_OFFSET = np.array([0., 0., 0.])
-# HIP_OFFSETS = np.array([[0., -0.00, 0.], [0., 0.0, 0.],
-#                         [-0., -0.0, 0.], [-0., 0., 0.]
-#                         ]) + COM_OFFSET
-
-
-
-##For position with MPC - strength 0.06
-# ABDUCTION_P_GAIN = 40.
-# ABDUCTION_D_GAIN =1
-# HIP_P_GAIN = 40.
-# HIP_D_GAIN = 0.5
-# KNEE_P_GAIN = 40.
-# KNEE_D_GAIN = 0.5
-
 ABDUCTION_P_GAIN = 60.
 ABDUCTION_D_GAIN =1
 HIP_P_GAIN = 25.
@@ -98,11 +84,8 @@ KNEE_P_GAIN = 20.
 KNEE_D_GAIN = 0.5
 
 
-
-
 # Bases on the readings from Laikago's default pose.
 INIT_MOTOR_ANGLES=np.array([-0.1, 0.8, -1.5,0.1, 0.8, -1.5,-0.1, 1., -1.5,0.1, 1., -1.5])
-# INIT_MOTOR_ANGLES = np.array([-0.287994, 1.385, -2.8087, 0.3094 ,1.3596, -2.809, -0.2408, 1.3247, -2.7896, 0.2885, 1.332, -2.8146])
 
 HIP_NAME_PATTERN = re.compile(r"\w+_hip_\w+")
 UPPER_NAME_PATTERN = re.compile(r"\w+_upper_\w+")
@@ -110,10 +93,7 @@ LOWER_NAME_PATTERN = re.compile(r"\w+_lower_\w+")
 TOE_NAME_PATTERN = re.compile(r"\w+_toe\d*")
 IMU_NAME_PATTERN = re.compile(r"imu\d*")
 
-# URDF_FILENAME = "unitree_a1/urdf/a1_unitree.urdf"
-URDF_FILENAME  = "unitree_a1/urdf/a1_unitree_modified_no_joint_dynamics.urdf"
-
-
+URDF_FILENAME  =  f'{parentdir}/egait/robots/urdf/unitree_a1/urdf/a1_unitree_modified_no_joint_dynamics.urdf'
 
 _BODY_B_FIELD_NUMBER = 2
 _LINK_A_FIELD_NUMBER = 3

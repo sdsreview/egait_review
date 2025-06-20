@@ -125,7 +125,7 @@ def main(argv):
     else:
         terrain_id = controller.create_terrain(height_value=0.0, slope_value=0.0) #Change this to create a terrain with specific height and slope
         ground_id = p.createMultiBody(0, terrain_id)
-        p.changeVisualShape(ground_id, -1, textureUniqueId=p.loadTexture("rock.jpeg"))
+        p.changeVisualShape(ground_id, -1, textureUniqueId=p.loadTexture("checker_blue.png"))
 
     p.changeDynamics(ground_id, -1, lateralFriction=1.0, restitution=0.0)
 

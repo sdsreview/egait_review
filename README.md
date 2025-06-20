@@ -41,15 +41,15 @@ This step might take a few minuites.
 
 ## Download Pretrained Checkpoints
 
-Download the pretrained eGAIT policy checkpoints from:
+Download the pretrained eGAIT policy checkpoints, by dowloading the `saved_model` from:
 
 https://drive.google.com/drive/folders/1rY5rzxWZWbVclIOgcqkLmA8_imL5ZqrD?usp=sharing
 
-Then move the `high_level` folder into the repository's evaluation script directory. In a new terminal:
+Then move the `saved_model` folder into the repository's evaluation script directory. In a new terminal:
 
 ```bash
 mv ~/Downloads/saved_model.zip ~/egait_review/egait_code/egait/evaluation_scripts/
-cd /home/egait/egait_code/egait/evaluation_scripts/
+cd ~/egait_review/egait_code/egait/evaluation_scripts/
 unzip saved_model.zip & rm saved_model.zip
 
 ```

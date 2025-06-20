@@ -371,8 +371,7 @@ class NeuralNetController():
         """
         # Initialize heightfield
            
-            
-        textureId = self.p.loadTexture("rock.jpeg")
+        
         heightfield_data = [0.0] * num_rows * num_cols
 
         # Fill the heightfield with slope and optional noise
