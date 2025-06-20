@@ -26,7 +26,7 @@ import re
 import numpy as np
 import pybullet as pyb  # pytype: disable=import-error
 import pybullet_data as p 
-pyb.setAdditionalSearchPath(p.getDataPath())
+
 
 
 from egait.robots import laikago_constants
