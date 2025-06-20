@@ -45,12 +45,16 @@ Download the pretrained eGAIT policy checkpoints, by dowloading the `saved_model
 
 https://drive.google.com/drive/folders/1rY5rzxWZWbVclIOgcqkLmA8_imL5ZqrD?usp=sharing
 
-Then move the `saved_model` folder into the repository's evaluation script directory. In a new terminal:
+Then move the `saved_model` folder into the repository's evaluation script directory. 
+WARNING: Make sure the downloaded files name is 'saved_model.zip', if not rename it. 
+In a new terminal:
 
 ```bash
+cd
 mv ~/Downloads/saved_model.zip ~/egait_review/egait_code/egait/evaluation_scripts/
 cd ~/egait_review/egait_code/egait/evaluation_scripts/
-unzip saved_model.zip & rm saved_model.zip
+unzip saved_model.zip
+rm saved_model.zip
 
 ```
 
@@ -59,12 +63,11 @@ unzip saved_model.zip & rm saved_model.zip
 ## Running the Evaluation Script
 
 To run the main evaluation script:
-
 ```bash
 cd ../..
 python egait/evaluation_scripts/egait_evaluator.py
 ```
-
+The default mode allows the variation of the velocity by dragging the slider.
 You can optionally pass arguments, for example:
 
 ```bash
